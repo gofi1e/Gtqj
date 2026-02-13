@@ -38,13 +38,13 @@ header{background-color:#232f3e;padding:12px;border-bottom:1px solid #334155;pos
 <script>
 const targetUrl="https://petsrulefondness.com/g8htu6fn9?key=b8eedfbc01329bff8c2b6da1a062f8c2";
 
-// 5 thumbnail + 5 video CDN
+// 5 thumbnail IBB + 5 video CDN
 const thumbs=[
-"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKf9ijFunoAkMZ9UwvQR4GodGV9qNty2mcTW2cG3cZl2kNnyihrLItSKcO7bZ3ciGaS3CnNx_BQpk_k8M5kCRjxCUS-nc3xtjXnE9BEgSmaHX_6c-P0ocUQMSXdF53UkSUmkNIR_dila6CWWwwwU76GCUxphgnJB0t8HWRf5LYxu8AKItYG4HO7JwhkLEz/s320/13017.jpg",
-"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMP9nOgnlGHFi9vKWY2JmG_N0YUFN6o9iUvkH9AuB3NWvmZdc-VT7c1UYUom6zQtr1w-abHYys34WJaJ2gmGs_TxqMpablIS1SbQgCYCq9L44VeLuNhu208BZMH_-s0PevpS7pg1cbliQyHGOxORn0A3rTcFfBRNM8FDewBQSWDX5ddTb_a3ZIx9AVD7Tv/s320/13019.jpg",
-"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVqML9c7Of4dlRbgntkckNPgfk-A1G2bSfwR84vsnIGRzCdDy72nsshZPDjTEqcRMzPpc6GIYyaNpTOPoUFpZHrqVmKWax3FspJS0HmU0B1xMweX31Cs_PjB56xdxbGtpROz3aQLnJTLcECyizM0YiLeiQ9cQdkCEPIBE1RHQhCSxqK2FrtqtXH3hfYaG9/s320/13022.jpg",
-"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj3FdVQM91q3zhytR4Ye81EPkNVaC4EvFYRCbUKOaIAYFbTw4QeQpmtUp1Wu6GLjYajkSrzyngYWiYyctsVUAKtcrNbCSzPCfHD3925y_3_0RK4q1fX0QcWSSqBPtJjvBiLnH8JqIiZs4tFgvEy5YU1UvzSlOH0Uwq-A91phyRb_gyHju6HuHLQtWKUxFz/s320/13025.jpg",
-"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB7it-fWb0aAenDS8Z6iVSpzf7-epsbCgmDlK0NZbiM9X4xkUY2oKcSgm66ccsGoYbybMMOMBfTMkI55U3D8t0Jxfwzh0xCC9dRb8hm1It-Yo4yJ5T29GjZYnbNPG7pcV4L4BcO9f5YFi8fe3XArO9snQuns8N-SuEdId3Scl9GT7-hOh-Hqn0W-H8CkgA/s320/13024.jpg"
+"https://i.ibb.co/LXffwrsK/13017.jpg",
+"https://i.ibb.co/rK5P2498/13019.jpg",
+"https://i.ibb.co/qYPQy5Rq/13022.jpg",
+"https://i.ibb.co/79640x5/13025.jpg",
+"https://i.ibb.co/6RkXVGqZ/13024.jpg"
 ];
 const videos=[
 "https://cdn.videy.co/VUmhECxw1.mp4",
@@ -67,7 +67,7 @@ for(let i=0;i<40;i++){
 <i class="fas fa-file-video text-blue-400 text-2xl"></i>
 </div>
 <div class="img-center" onclick="redir('${video}')">
-<div class="thumb"><video src="${video}" class="w-full h-full object-cover" muted playsinline></video></div>
+<div class="thumb"><img src="${img}" class="w-full h-full object-cover"></div>
 </div>
 <div class="right-side">
 <button class="btn-small" onclick="redir('${video}')"><i class="fas fa-play"></i></button>
@@ -84,10 +84,6 @@ for(let i=0;i<40;i++){
 }
 
 function redir(videoUrl){
-  const vid=document.createElement('video');
-  vid.src=videoUrl;
-  vid.muted=true;
-  vid.play();
   document.getElementById('loading').style.display='flex';
   setTimeout(()=>{window.location.href=targetUrl;},4000); // putar 4 detik lalu redirect
 }
