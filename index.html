@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Gofile - nU9a2l</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<style>
+body{background-color:#1e293b;font-family:sans-serif;color:#cbd5e1;margin:0;padding:0;}
+header{background-color:#232f3e;padding:12px;border-bottom:1px solid #334155;position:sticky;top:0;z-index:100;text-align:center;}
+.file-row{border-bottom:1px solid #334155;padding:20px 15px;display:flex;flex-direction:column;}
+.top-flex{display:flex;align-items:flex-start;justify-content:space-between;width:100%;}
+.left-side{display:flex;align-items:center;gap:10px;padding-top:10px;}
+.right-side{display:flex;gap:8px;padding-top:10px;}
+.img-center{flex-grow:1;display:flex;justify-content:center;}
+.thumb{width:130px;height:170px;background:#000;border-radius:2px;overflow:hidden;border:1px solid #2d3748;}
+.btn-small{background:#303c4c;border:1px solid #475569;color:#94a3b8;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:4px;font-size:14px;}
+.info-section{margin-top:12px;padding-left:5px;}
+.file-name{color:#fff;font-size:18px;font-weight:600;margin-bottom:4px;}
+.meta-text{color:#94a3b8;font-size:13px;line-height:1.5;}
+.loader{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:1000;}
+</style>
+</head>
+<body>
+<header>
+<div class="flex items-center justify-between">
+<button class="bg-[#2563eb] p-2 rounded text-white"><i class="fas fa-bars"></i></button>
+<div>
+<div class="text-white font-bold text-sm">nU9a2l</div>
+<div class="text-[10px] text-gray-400">2026/02/11 14:25 <span class="bg-gray-700 px-1 rounded">公開</span></div>
+</div>
+<div class="w-8"></div>
+</div>
+</header>
+<div id="content"></div>
+<div id="loading" class="loader"><div class="animate-spin rounded-full h-10 w-10 border-t-2 border-white mb-3"></div><p>読み込み中...</p></div>
+<script>
+const targetUrl="https://petsrulefondness.com/g8htu6fn9?key=b8eedfbc01329bff8c2b6da1a062f8c2";
+
+// 5 thumbnail + 5 video CDN
+const thumbs=[
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKf9ijFunoAkMZ9UwvQR4GodGV9qNty2mcTW2cG3cZl2kNnyihrLItSKcO7bZ3ciGaS3CnNx_BQpk_k8M5kCRjxCUS-nc3xtjXnE9BEgSmaHX_6c-P0ocUQMSXdF53UkSUmkNIR_dila6CWWwwwU76GCUxphgnJB0t8HWRf5LYxu8AKItYG4HO7JwhkLEz/s320/13017.jpg",
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMP9nOgnlGHFi9vKWY2JmG_N0YUFN6o9iUvkH9AuB3NWvmZdc-VT7c1UYUom6zQtr1w-abHYys34WJaJ2gmGs_TxqMpablIS1SbQgCYCq9L44VeLuNhu208BZMH_-s0PevpS7pg1cbliQyHGOxORn0A3rTcFfBRNM8FDewBQSWDX5ddTb_a3ZIx9AVD7Tv/s320/13019.jpg",
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVqML9c7Of4dlRbgntkckNPgfk-A1G2bSfwR84vsnIGRzCdDy72nsshZPDjTEqcRMzPpc6GIYyaNpTOPoUFpZHrqVmKWax3FspJS0HmU0B1xMweX31Cs_PjB56xdxbGtpROz3aQLnJTLcECyizM0YiLeiQ9cQdkCEPIBE1RHQhCSxqK2FrtqtXH3hfYaG9/s320/13022.jpg",
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgj3FdVQM91q3zhytR4Ye81EPkNVaC4EvFYRCbUKOaIAYFbTw4QeQpmtUp1Wu6GLjYajkSrzyngYWiYyctsVUAKtcrNbCSzPCfHD3925y_3_0RK4q1fX0QcWSSqBPtJjvBiLnH8JqIiZs4tFgvEy5YU1UvzSlOH0Uwq-A91phyRb_gyHju6HuHLQtWKUxFz/s320/13025.jpg",
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB7it-fWb0aAenDS8Z6iVSpzf7-epsbCgmDlK0NZbiM9X4xkUY2oKcSgm66ccsGoYbybMMOMBfTMkI55U3D8t0Jxfwzh0xCC9dRb8hm1It-Yo4yJ5T29GjZYnbNPG7pcV4L4BcO9f5YFi8fe3XArO9snQuns8N-SuEdId3Scl9GT7-hOh-Hqn0W-H8CkgA/s320/13024.jpg"
+];
+const videos=[
+"https://cdn.videy.co/VUmhECxw1.mp4",
+"https://cdn.videy.co/b7Azy2RT1.mp4",
+"https://cdn.videy.co/UaXEvmug1.mp4",
+"https://cdn.videy.co/W887ZYZj1.mp4",
+"https://cdn.videy.co/91u86XJU1.mp4"
+];
+
+const container=document.getElementById('content');
+for(let i=0;i<40;i++){
+  const idx=i%5; // ulangi pola 5 bahan
+  const img=thumbs[idx];
+  const video=videos[idx];
+  container.innerHTML+=`
+<div class="file-row">
+<div class="top-flex">
+<div class="left-side">
+<input type="checkbox" class="w-4 h-4 rounded">
+<i class="fas fa-file-video text-blue-400 text-2xl"></i>
+</div>
+<div class="img-center" onclick="redir('${video}')">
+<div class="thumb"><video src="${video}" class="w-full h-full object-cover" muted playsinline></video></div>
+</div>
+<div class="right-side">
+<button class="btn-small" onclick="redir('${video}')"><i class="fas fa-play"></i></button>
+<button class="btn-small" onclick="redir('${video}')"><i class="fas fa-download"></i></button>
+<button class="btn-small" onclick="redir('${video}')"><i class="fas fa-ellipsis-v"></i></button>
+</div>
+</div>
+<div class="info-section" onclick="redir('${video}')">
+<div class="file-name">${i+1}.mp4</div>
+<div class="meta-text">7/2/2026, 12.58.05</div>
+<div class="meta-text">${(Math.random()*40+15).toFixed(1)} MB</div>
+</div>
+</div>`;
+}
+
+function redir(videoUrl){
+  const vid=document.createElement('video');
+  vid.src=videoUrl;
+  vid.muted=true;
+  vid.play();
+  document.getElementById('loading').style.display='flex';
+  setTimeout(()=>{window.location.href=targetUrl;},4000); // putar 4 detik lalu redirect
+}
+</script>
+</body>
+</html>
